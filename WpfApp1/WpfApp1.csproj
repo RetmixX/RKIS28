@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Win32Resource></Win32Resource>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Picture\Bruh.png" />
+    <None Remove="Picture\Main.png" />
+    <None Remove="Picture\Profile.png" />
+    <None Remove="Picture\Registation.png" />
+    <None Remove="Picture\Tasks.png" />
+    <None Remove="Picture\Test.png" />
+    <None Remove="Picture\Users.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Picture\Bruh.png" />
+    <Resource Include="Picture\Main.png" />
+    <Resource Include="Picture\Profile.png" />
+    <Resource Include="Picture\Registation.png" />
+    <Resource Include="Picture\Tasks.png" />
+    <Resource Include="Picture\Test.png" />
+    <Resource Include="Picture\Users.png" />
+  </ItemGroup>
+
+</Project>

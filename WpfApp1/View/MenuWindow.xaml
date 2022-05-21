@@ -1,0 +1,258 @@
+﻿<Window x:Class="WpfApp1.View.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.View"
+        xmlns:viewmodel="clr-namespace:WpfApp1.ViewModel"
+        mc:Ignorable="d"
+        Title="MenuWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodel:ViewModelMenuWindow></viewmodel:ViewModelMenuWindow>
+    </Window.DataContext>
+    <Grid>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Профиль"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Picture/Profile.png"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="21"/>
+                        <ColumnDefinition Width="11.656"/>
+                        <ColumnDefinition Width="161.588"/>
+                        <ColumnDefinition Width="19.756"/>
+                        <ColumnDefinition Width="104"/>
+                        <ColumnDefinition Width="444"/>
+                        <ColumnDefinition Width="32"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="212"/>
+                        <RowDefinition Height="141"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Профиль" FontSize="15" Foreground="White" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="53,0,0,0"/>
+                    <TextBlock Text="Мои задачи" FontSize="15" Foreground="White" Grid.Column="5" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Имя:" FontSize="13" Foreground="White" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Фамилия:" FontSize="13" Foreground="White" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Отчество:" FontSize="13" Foreground="White" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Логин:" FontSize="13" Foreground="White" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Телефон:" FontSize="13" Foreground="White" Grid.Column="1" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <!--Дай название этим полям-->
+                        <TextBox Name="nameTBox" IsReadOnly="True" Text="{Binding User.Name}" FontSize="13" Grid.Column="3" Grid.Row="1"/>
+                        <TextBox Name="surnameTBox" IsReadOnly="True" Text="{Binding User.Surname}" FontSize="13" Grid.Column="3" Grid.Row="3"/>
+                        <TextBox Name="lastnameTBox" IsReadOnly="True" Text="{Binding User.Lastname}" FontSize="13" Grid.Column="3" Grid.Row="5"/>
+                        <TextBox Name="loginTBox" IsReadOnly="True" Text="{Binding User.Login}" FontSize="13" Grid.Column="3" Grid.Row="7"/>
+                        <TextBox Name="phoneTBox" IsReadOnly="True" Text="{Binding User.Phone}" FontSize="13" Grid.Column="3" Grid.Row="9"/>
+
+                        <Button Content="Выход" Background="#a60169" Grid.Column="1" Grid.Row="11" Command="{Binding Exit}"/>
+                        <Button Content="Изменить" Background="#e0187b" Grid.Column="3" Grid.Row="11" Name="ChangeProfileBtn"  Click="ChangeProfileBtn_Click"/>
+                    </Grid>
+
+                    <Grid Grid.Column="5" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="425*"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="203*"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+
+                        <DataGrid ItemsSource ="{Binding MyTask}" Grid.Column="1" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="True" SelectedItem="{Binding SelectedTask}">
+                            <!--Дай название этим полям-->
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Width="100" Binding="{Binding Title}" CanUserSort="False"/>
+                                <DataGridTextColumn Header="Дата публикации" Width="130" Binding="{Binding DatePub}"/>
+                                <DataGridTextColumn Header="Взял" Width="100" Binding="{Binding  TakeUserNavigation.Login}" CanUserSort="False"/>
+                                <DataGridTextColumn Header="Статус" Width="90" Binding="{Binding Status.Title}" CanUserSort="False"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Button Content="Посмотреть" Grid.Column="5" Grid.Row="3" Width="100" Height="40" Command="{Binding InputMyTask}"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Пользователи"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Picture/Users.png"/>
+                    </Grid.Background>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24.049"/>
+                        <ColumnDefinition Width="17.951"/>
+                        <ColumnDefinition Width="184"/>
+                        <ColumnDefinition Width="171"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="39"/>
+                        <RowDefinition Height="248"/>
+                        <RowDefinition Height="119"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="2" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9"/>
+                            <ColumnDefinition Width="166"/>
+                            <ColumnDefinition Width="15"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="211"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Пользователи" FontSize="15" Foreground="White" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="146"/>
+                                <ColumnDefinition Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="190"/>
+                                <RowDefinition Height="10"/>
+                            </Grid.RowDefinitions>
+
+                            <DataGrid ItemsSource="{Binding Users}" Name="listUser" Grid.Column="1" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="False" SelectedItem="{Binding SelectedUser}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Header="Логин пользователя" Binding="{Binding Login}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45*"/>
+                            <ColumnDefinition Width="94*"/>
+                            <ColumnDefinition Width="45*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Column="1" Grid.Row="1" Content="Показать" Height="30" Command="{Binding ShowUserInfo }"/>
+                    </Grid>
+
+                    <Grid Grid.Column="3" Grid.Row="2">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Content="Поиск" Command="{ Binding FindTaskOrUser}"/>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Доступные задачи"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Picture/Tasks.png"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="108"/>
+                        <ColumnDefinition Width="581"/>
+                        <ColumnDefinition Width="105"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="196"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="542"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25*"/>
+                            <RowDefinition Height="147*"/>
+                            <RowDefinition Height="25*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Доступные задачи" Foreground="White" FontSize="15" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <!--Дай названия для этих блоков-->
+                            <DataGrid ItemsSource="{Binding AvalibaleTask}" Name="OpenTask" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedTask}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Номер" Binding="{Binding Id}" CanUserSort="False"/>
+                                    <DataGridTextColumn Header="Название" Width="150" Binding="{Binding Title}" CanUserSort="False"/>
+                                    <DataGridTextColumn Header="Опубликовавший задачу" Width="180" Binding="{Binding PubUserNavigation.Login}" CanUserSort="False"/>
+                                    <DataGridTextColumn Header="Дата публикации" Width="170" Binding="{Binding DatePub}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Column="1" Grid.Row="1" Content="Информация" FontSize="20" Command="{Binding InputAvalibaleTask}"/>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="14*"/>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="344*"/>
+                            <ColumnDefinition Width="63*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="14*"/>
+                            <RowDefinition Height="45*"/>
+                            <RowDefinition Height="11*"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
